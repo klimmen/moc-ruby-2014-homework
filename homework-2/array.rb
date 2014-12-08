@@ -3,7 +3,8 @@ class Snake
   def sleepingSnake (arraySnake)
     puts
     puts "arraySnake"
-    arraySnake.each {|item| item.each {|item2| print item2; print ' '}; puts }
+    arraySnake.each {|item| item.each {|item2| if item2 < 10; then print item2; print '   ';
+     else  print item2; print '  '; end}; puts }
   end
 
   def amountCircle(n)
