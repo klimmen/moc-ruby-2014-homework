@@ -39,16 +39,18 @@ RESPONSE='{"person":{
 
 response = JSON.parse(RESPONSE)
 
-Person = Struct.new(*response["person"].keys.collect(&:to_sym))
+Person = Struct.new(*response["person"].keys.collect(&:to_sym)) do 
 
-Person.class_eval do
-  include PersonAdult
-  include MagicWords
-  
   def have_hobbies?(additional_info)
     !additional_info["hobby"].empty?
   end
-  
+
+end
+
+Person.class_eval do
+  include PersonAdult
+  include MagicWords 
+   
   magic_methods(response["person"]["additional_info"] ["pets"][0])
 
 end
