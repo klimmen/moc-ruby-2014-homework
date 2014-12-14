@@ -3,15 +3,7 @@ require 'json'
 
 module PersonAdult
   def adult?(*personal_data)
-  	result = false
-    personal_data.each do |data|
-      if data["age"] >= 18
-        result = true
-      else
-        result = false
-      end	
-    end
-    result
+  	personal_data[0]["age"] >= 18
   end
 end
 
@@ -30,7 +22,7 @@ module MagicWords
   def self.included(base)
     base.extend(ClassMethods)
   end
-  
+
 end
 
 
