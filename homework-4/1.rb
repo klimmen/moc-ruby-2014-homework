@@ -15,16 +15,31 @@ module PersonAdult
   end
 end
 
+module MagicWords
+  module ClassMethods
+    def magic_methods(pets)
+      pets.each do |key, value| 
+        define_method("pets_#{key}") do 
+          value
+        end
+      end 
+    end
+  end
+  def self.included(base)
+    base.extend(ClassMethods)
+  end
+end
 
 
 RESPONSE='{"person":{"personal_data":{"name": "John Smith", "gender":"male", "age":56}, "social_profiles":["http://facebook.com/lala","http://twitter.com/lala","http://lala.ru"], "additional_info":{"hobby":["pubsurfing","drinking","hiking"], "pets":[{"name":"Mittens","species":"Felis silvestris catus"}]}}}'
 response = JSON.parse(RESPONSE)
 
 Person = Struct.new(*response["person"].keys.collect(&:to_sym))
+
 Person.class_eval do
 	attr_accessor :pets
   include PersonAdult
-
+  include MagicWords
     def have_hobbies?(additional_info)
   	  result = false
       additional_info.each do |key, value|    	
@@ -34,14 +49,7 @@ Person.class_eval do
       end
       result 
     end
-
-response["person"]["additional_info"] ["pets"][0].each do |key, value| 
-      define_method("pets_#{key}") do 
-        value
-      end
-    end 
-  
-
+  magic_methods(response["person"]["additional_info"] ["pets"][0])
 end
 
 person = Person.new(*response["person"].values)
@@ -57,12 +65,6 @@ person.instance_eval do
     result
   end
  
-#  magic_words.each do |magic_word|
-#define_method magic_word do
-#{}"Real magic word #{magic_word}"
-#end
-#end
-
 end
 p "adult?" 
 p person.adult?(person.personal_data)
@@ -70,4 +72,7 @@ p "twitter_account?"
 p person.twitter_account?
 p "have_hobbies?"
 p person.have_hobbies?(person.additional_info)
+p "pets name"
 p person.pets_name
+p "pets species"
+p person.pets_species
