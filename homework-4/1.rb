@@ -45,7 +45,9 @@ person.instance_eval do
     result
   end
 end
- 
+p "adult?" 
 p person.adult?(person.personal_data)
+p "twitter_account?"
 p person.twitter_account?
+p "have_hobbies?"
 p person.have_hobbies?(person.additional_info)
