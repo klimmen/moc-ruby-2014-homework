@@ -16,18 +16,21 @@ module PersonAdult
 end
 
 module MagicWords
+
   module ClassMethods
     def magic_methods(pets)
       pets.each do |key, value| 
         define_method("pets_#{key}") do 
-          value
+          "pens #{key} - #{value}"
         end
       end 
     end
   end
+
   def self.included(base)
     base.extend(ClassMethods)
   end
+  
 end
 
 
@@ -37,7 +40,6 @@ response = JSON.parse(RESPONSE)
 Person = Struct.new(*response["person"].keys.collect(&:to_sym))
 
 Person.class_eval do
-	attr_accessor :pets
   include PersonAdult
   include MagicWords
     def have_hobbies?(additional_info)
@@ -72,7 +74,5 @@ p "twitter_account?"
 p person.twitter_account?
 p "have_hobbies?"
 p person.have_hobbies?(person.additional_info)
-p "pets name"
 p person.pets_name
-p "pets species"
 p person.pets_species
