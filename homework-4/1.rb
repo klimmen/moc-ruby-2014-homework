@@ -29,7 +29,13 @@ module MagicWords
 
 end
 
-RESPONSE='{"person":{"personal_data":{"name": "John Smith", "gender":"male", "age":56}, "social_profiles":["http://facebook.com/lala","http://twitter.com/lala","http://lala.ru"], "additional_info":{"hobby":["pubsurfing","drinking","hiking"], "pets":[{"name":"Mittens","species":"Felis silvestris catus"}]}}}'
+RESPONSE='{"person":{
+                      "personal_data":{"name": "John Smith", "gender":"male", "age":56},
+                      "social_profiles":["http://facebook.com/lala","http://twitter.com/lala","http://lala.ru"], 
+                      "additional_info":{"hobby":["pubsurfing","drinking","hiking"], 
+                                         "pets":[{"name":"Mittens","species":"Felis silvestris catus"}]}
+                    }
+          }'
 
 response = JSON.parse(RESPONSE)
 
