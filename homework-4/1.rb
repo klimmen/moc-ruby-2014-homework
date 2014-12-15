@@ -3,8 +3,8 @@ require 'json'
 
 module PersonAdult
 
-  def adult?(*personal_data)
-  	personal_data[0]["age"] >= 18
+  def adult?(personal_data)
+  	personal_data["age"] >= 18
   end
 
 end
