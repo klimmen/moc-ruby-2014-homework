@@ -13,21 +13,15 @@ module MagicWords
 
   module ClassMethods
 
-    def magic_methods(pets)
-      
-      define_method("pets_length") do 
+    def magic_methods(pets)    
+
+      define_method("amount_of_pets") do 
         pets.length
       end
       
-      define_method("pets_names") do
+      define_method("pets_name") do
         pets_name = []
-        pets.each do |pet|
-          pet.each do |key,value|
-            if key == "name"
-              pets_name << value
-            end
-          end
-        end
+        pets.each {|pet| pets_name << pet["name"] }
         pets_name.join(", ")
       end
 
@@ -66,7 +60,7 @@ end
 Person.class_eval do
   include PersonAdult
   include MagicWords 
-   
+
   magic_methods(response["person"]["additional_info"] ["pets"])
 
 end
@@ -87,8 +81,7 @@ p "twitter_account?"
 p person.twitter_account?
 p "have_hobbies?"
 p person.have_hobbies?
-p "pets_length"
-p person.pets_length
-p "pets_names"
-p person.pets_names
-
+p "amount_of_pets"
+p person.amount_of_pets
+p "pets_name"
+p person.pets_name
