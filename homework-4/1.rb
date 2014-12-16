@@ -3,7 +3,7 @@ require 'json'
 
 module PersonAdult
 
-  def adult?(personal_data)
+  def adult?
   	personal_data["age"] >= 18
   end
 
@@ -14,13 +14,25 @@ module MagicWords
   module ClassMethods
 
     def magic_methods(pets)
-      pets.each do |key, value| 
-        define_method("pets_#{key}") do 
-          "pens #{key} - #{value}"
+      
+      define_method("pets_length") do 
+        pets.length
+      end
+      
+      define_method("pets_names") do
+        pets_name = []
+        pets.each do |pet|
+          pet.each do |key,value|
+            if key == "name"
+              pets_name << value
+            end
+          end
         end
-      end 
-    end
+        pets_name.join(", ")
+      end
 
+    end
+  
   end
 
   def self.included(base)
@@ -33,7 +45,11 @@ RESPONSE='{"person":{
                       "personal_data":{"name": "John Smith", "gender":"male", "age":56},
                       "social_profiles":["http://facebook.com/lala","http://twitter.com/lala","http://lala.ru"], 
                       "additional_info":{"hobby":["pubsurfing","drinking","hiking"], 
-                                         "pets":[{"name":"Mittens","species":"Felis silvestris catus"}]}
+                                         "pets":[{"name":"Mittens","species":"сat"},
+                                                 {"name":"Tom","species":"cat"},
+                                                 {"name":"Ruby","species":"dog"}
+                                                ]
+                                        }
                     }
           }'
 
@@ -41,8 +57,8 @@ response = JSON.parse(RESPONSE)
 
 Person = Struct.new(*response["person"].keys.collect(&:to_sym)) do 
 
-  def have_hobbies?(additional_info)
-    !additional_info["hobby"].empty?
+  def have_hobbies?
+    additional_info["hobby"].any?
   end
 
 end
@@ -51,7 +67,7 @@ Person.class_eval do
   include PersonAdult
   include MagicWords 
    
-  magic_methods(response["person"]["additional_info"] ["pets"][0])
+  magic_methods(response["person"]["additional_info"] ["pets"])
 
 end
 
@@ -60,22 +76,19 @@ person = Person.new(*response["person"].values)
 person.instance_eval do
  
   def twitter_account?
-    result = false
-    social_profiles.each do |social_profile|     
-      if !social_profile.downcase.scan(/twitter/).empty?
-        result = true
-      end
-    end
-    result
+      social_profiles.join.downcase.scan(/twitter/).any?
   end
  
 end
 
 p "adult?" 
-p person.adult?(person.personal_data)
+p person.adult?
 p "twitter_account?"
 p person.twitter_account?
 p "have_hobbies?"
-p person.have_hobbies?(person.additional_info)
-p person.pets_name
-p person.pets_species
+p person.have_hobbies?
+p "pets_length"
+p person.pets_length
+p "pets_names"
+p person.pets_names
+
