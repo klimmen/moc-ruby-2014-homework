@@ -4,7 +4,7 @@ require 'json'
 module PersonAdult
 
   def adult?
-  	personal_data["age"] >= 18
+    personal_data["age"] >= 18
   end
 
 end
