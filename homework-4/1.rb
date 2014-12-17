@@ -13,15 +13,15 @@ module MagicWords
 
   module ClassMethods
 
-    def magic_methods(pets)    
+    def magic_methods    
 
       define_method("amount_of_pets") do 
-        pets.length
+        additional_info["pets"].length
       end
       
       define_method("pets_name") do
         pets_name = []
-        pets.each {|pet| pets_name << pet["name"] }
+        additional_info["pets"].each {|pet| pets_name << pet["name"] }
         pets_name.join(", ")
       end
 
@@ -61,7 +61,7 @@ Person.class_eval do
   include PersonAdult
   include MagicWords 
 
-  magic_methods(response["person"]["additional_info"] ["pets"])
+  magic_methods
 
 end
 
