@@ -24,8 +24,7 @@ response = JSON.parse(RESPONSE)
 
 def cleate_classes (&block)
   Proc.new do |lambda|
-   name_class = yield
-   lambda.call(name_class)
+   lambda.call(yield)
   end
 end
 
