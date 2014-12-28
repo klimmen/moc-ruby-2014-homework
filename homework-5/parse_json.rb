@@ -28,7 +28,7 @@ def cleate_classes (&block)
   end
 end
 
-def parse_person(person, &block)
+def parse_person(person, &create_methods)
   person.each do |key, value|
     person = cleate_classes { key.split("_").map! {|a| a.capitalize}.join}
     lambda = ->(name_class) do
