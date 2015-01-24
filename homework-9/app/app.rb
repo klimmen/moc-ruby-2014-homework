@@ -36,8 +36,7 @@ get '/kinogo/:name' do
 
    unless genres.include?(params[:name])
      status 404
-     "
-     <h2> there is no such genre </h2>"     
+     "<h2> there is no such genre </h2>"     
    else
    	 if params[:name] == "all" 
        params[:name] = ""

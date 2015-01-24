@@ -55,9 +55,9 @@ describe "Genre page" do
   end
 end
 
-describe "Genre page" do
+describe "kinogo.net" do
   
-  it "extracts the contents of the kinogo.net " do
+  it "extracts the contents of the site " do
     expect(HTTP_TEST).to match("DOCTYPE html")
     expect(HTTP_TEST).to match("<title>")
     expect(HTTP_TEST).to match('class="zagolovki"')   

@@ -9,9 +9,6 @@ ENV['RACK_ENV'] = 'test'
 
 Capybara.app = Sinatra::Application
 
-
-
-
 module RSpecMixin
   RSpec.configure do |config|
     config.include Capybara
@@ -19,6 +16,5 @@ module RSpecMixin
   include Rack::Test::Methods
   def app() Sinatra::Application end
 end
-
 
 RSpec.configure { |c| c.include RSpecMixin }
