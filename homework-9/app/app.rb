@@ -38,7 +38,7 @@ get '/kinogo/:name' do
      status 404
      "<h2> this is no such genre </h2>"     
    else
-   	 params[:name]="" if params[:name]=="all"
+     params[:name]="" if params[:name]=="all"
      videos = ParsingSite.parsing_kinogo(params[:name]) 
      videos[1] ||= "<h2>There are not  films in this genre</h2>"
      videos.unshift("<h2> CONTENT OF THE SITE TODAY </h2> ")
