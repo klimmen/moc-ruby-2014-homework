@@ -5,11 +5,6 @@ GENRES = ["all", "biografii", "boeviki", "vesterny", "voennye", "detektivy", "de
     "multfilmy", "mjuzikly", "otechestvenie", "prikljuchenija", "semejnye", "sportivnye",
     "trillery", "uzhasy", "fantastika", "fjentjezi" ]
 
-LINK = ["Все жанры", "Биографии", "Боевики", "Вестерны", "Военные", "Детективы", "Детские",
-        "Документальные","Драмы", "Исторические", "Комедии", "Криминал", "Мелодрамы",
-        "Мультфильмы", "Мюзиклы", "Отечественные", "Приключения", "Семейные", "Cпортивные",
-        "Триллеры", "Ужасы", "Фантастика", "Фэнтези"]
-
 HTTP_TEST = Nokogiri::HTML(open("http://kinogo.net/")).to_s
 
 describe "Home page" do
@@ -18,29 +13,24 @@ describe "Home page" do
   it "should allow accessing the Home page" do
     last_response.should be_ok
   end
-
-end
- 
-describe "Home page" do
-  before { visit '/' } 
-
+  
   it "should have the content 'Home page'" do
-    expect(page).to have_content('Genres:')
-  end
-
-  LINK.each do |link|
-    it "should have the link '#{link}'" do
-      expect(page).to have_content('Genres:')
-  	  click link
-    end
+    expect(last_response.body).to match('Genres:')
   end
 
 end
 
-describe "Genre page" do
+GENRES.each do |genre| 
+  describe "Home page" do
+    before { visit '/' } 
 
-  GENRES.each do |genre|
-    #before { get "/kinogo/#{genre}" }
+    it "should have the link '#{genre}'" do
+      click genre
+    end
+  
+  end
+
+  describe "Genre page" do
    	
     it "should allow accessing the /kinogo/#{genre} page" do
       get "/kinogo/#{genre}"	
@@ -53,6 +43,7 @@ describe "Genre page" do
     end
 
   end
+
 end
 
 describe "kinogo.net" do
