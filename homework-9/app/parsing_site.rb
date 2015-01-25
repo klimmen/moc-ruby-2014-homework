@@ -13,11 +13,11 @@ class ParsingSite
       doc.css('.dateicon').each { |x| date << x.text }      
       count = 0
       date.each_index do |i|
-        if !date[i][/Сегодня/].nil?
-          count +=1
-          result << "<p> #{count} - #{name_video[i]} </p>"          
+        if date[i][/Сегодня/].nil?
+          stop = false                  
         else
-  	      stop = false
+  	      count +=1
+          result << "<p> #{count} - #{name_video[i]} </p>"  
         end
       end
       page+=1            
