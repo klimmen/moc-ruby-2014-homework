@@ -10,11 +10,11 @@ HTTP_TEST = Nokogiri::HTML(open("http://kinogo.net/")).to_s
 describe "Home page" do
   before { get '/' }
 
-  it "should allow accessing the Home page" do
+  it "should allow accessing " do
     last_response.should be_ok
   end
   
-  it "should have the content 'Home page'" do
+  it "should have the content " do
     expect(last_response.body).to match('Genres:')
   end
 
@@ -39,7 +39,7 @@ GENRES.each do |genre|
 
     it "should have the content /kinogo/#{genre} " do
       get "/kinogo/#{genre}"
-      expect(last_response.body).to match("CONTENT OF THE SITE TODAY")
+      expect(last_response.body).to match("MOVIES")
     end
 
   end
@@ -48,7 +48,7 @@ end
 
 describe "kinogo.net" do
   
-  it "extracts the contents of the site " do
+  it "should extracts the contents of the page " do
     expect(HTTP_TEST).to match("DOCTYPE html")
     expect(HTTP_TEST).to match("<title>")
     expect(HTTP_TEST).to match('class="zagolovki"')   

@@ -1,6 +1,6 @@
 
 get '/' do
-  "<h2> CONTENT OF THE SITE TODAY </h2>
+  "<h2> MOVIES </h2>
    <h4> Genres: </h4>
    <a id='all' href='/kinogo/all'>Все жанры</a> <br>
    <a id='biografii' href='/kinogo/biografii'>Биографии</a>  <br> 
@@ -36,12 +36,12 @@ get '/kinogo/:name' do
 
    unless genres.include?(params[:name])
      status 404
-     "<h2> this is no such genre </h2>"     
+     "<h2> Genre with such name not exist</h2>"     
    else
      params[:name]="" if params[:name]=="all"
      videos = ParsingSite.parsing_kinogo(params[:name]) 
-     videos[1] ||= "<h2>There are not  films in this genre</h2>"
-     videos.unshift("<h2> CONTENT OF THE SITE TODAY </h2> ")
+     videos[1] ||= "<h2>There are not movies in this genre</h2>"
+     videos.unshift("<h2> MOVIES </h2> ")
    end
 end
 
