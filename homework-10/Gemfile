@@ -1,0 +1,10 @@
+source "https://rubygems.org"
+
+gem 'sinatra'
+gem 'nokogiri'
+gem 'rspec'
+gem 'rack-test'
+gem 'capybara',         '0.3.9'
+gem "sinatra-activerecord"
+gem "sqlite3"
+gem "rake"
