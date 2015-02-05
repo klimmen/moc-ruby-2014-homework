@@ -1,5 +1,4 @@
 require File.expand_path '../spec_helper.rb', __FILE__
-
 GENRES = ["all", "biografii", "boeviki", "vesterny", "voennye", "detektivy", "detektivy",
     "detskie", "dokumentalnye", "dramy", "istoricheskie", "komedii", "kriminal", "melodramy",
     "multfilmy", "mjuzikly", "otechestvenie", "prikljuchenija", "semejnye", "sportivnye",
@@ -7,7 +6,13 @@ GENRES = ["all", "biografii", "boeviki", "vesterny", "voennye", "detektivy", "de
 
 HTTP_TEST = Nokogiri::HTML(open("http://kinogo.net/")).to_s
 
+describe "FactoryGirl" do
+  genre = FactoryGirl.create(:genre)
+  movie = FactoryGirl.create(:movie)
+end
+
 describe "Home page" do
+
   before { get '/' }
 
   it "should allow accessing " do
@@ -30,8 +35,7 @@ GENRES.each do |genre|
   
   end
 
-  describe "Genre page" do
-   	
+  describe "Genre page" do    
     it "should allow accessing the /kinogo/#{genre} page" do
       get "/kinogo/#{genre}"	
       last_response.should be_ok

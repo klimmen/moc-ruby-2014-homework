@@ -1,5 +1,5 @@
 ActiveRecord::Base.establish_connection(
-  YAML::load(File.open("./db/database.yml"))['development']
+  YAML::load(File.open("./db/database.yml"))[settings.environment.to_s]
 )
 
 class Genre<ActiveRecord::Base

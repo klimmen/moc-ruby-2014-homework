@@ -1,0 +1,15 @@
+<table class="table">
+  <tr class="alert alert-info">
+    <td>id</td>
+    <td>name</td>
+    <td>wovies</td>
+  </tr>
+  <% genres.each do |genre|  %>
+    <tr >
+      <td><%= genre.id %></td>
+      <td><%= genre.name %></td>
+      <td><a class ="btn-sm btn-info" href="/genres/<%=genre.id%>">wovies</a></td>
+    </tr>
+  <% end %>
+</table>
+

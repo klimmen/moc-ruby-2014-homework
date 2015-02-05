@@ -1,0 +1,12 @@
+<table class="table">
+  <tr class="alert alert-info">
+    <td>id</td>
+    <td>name</td>
+  </tr>
+  <% genres.movies.each do |movie|  %>
+    <tr>
+      <td><%= movie.id %></td>
+      <td><%= movie.name %></td>
+    </tr>
+  <% end %>
+</table>
