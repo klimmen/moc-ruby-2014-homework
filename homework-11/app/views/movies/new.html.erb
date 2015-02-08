@@ -1,0 +1,23 @@
+<h1>New Movie</h1>
+<%= form_for :movie_genre, url: "/movies" do |f| %>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <% count=0 %>
+  <div id="selects<%=count+1%>">    
+  	<%=f.select "genre#{count+=1}_id", @genres.map{ |c| [c.name, c.id] } %> 
+    <input id="del_select<%=count%>" value="destroy" onclick="delete_select(<%=count%>)" type="button"/> 	     
+  </div>
+  <div id="add_select">
+  </div>
+  <div>
+  	<input id="b1" value="add genre" onclick="create_select()" type="button"/>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+<%= link_to 'Back', movies_path %>
+
+

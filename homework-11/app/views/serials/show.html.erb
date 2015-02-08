@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>  
+  <%= @serial.name %>
+</p>
+<p>
+	<strong>Generes:</strong>
+<%@serial.genre_movie_serial.all.each do |g| %>  
+            <%=g.genre.name %> 
+<% end %>
+</p>
+
+<%= link_to 'Edit', edit_serial_path(@serial) %> |
+<%= link_to 'Back', serials_path %>

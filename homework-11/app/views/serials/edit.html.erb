@@ -1,0 +1,24 @@
+<h1>Editing Serial</h1>
+<%= form_for :serial_genre, url: "/serials/#{@serial.id}", method: "put" do |f| %>
+  <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name, value: @serial.name%>
+  </div>
+  <% count=0 %>
+  <%@serial.genre_movie_serial.all.each do |g| %>  
+    <div id="selects<%=count+1%>">
+      <%=f.select "genre#{count+=1}_id".to_sym, select_option_genres(g) %>
+      <input id="del_select<%=count%>" value="destroy" onclick="delete_select(<%=count%>)" type="button"/>
+    </div>
+  <% end %>
+  <div id="add_select">
+  </div>
+  <div>
+    <input id="b1" value="add genre" onclick="create_select()" type="button"/>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+<%= link_to 'Show', @serial %> |
+<%= link_to 'Back', serials_path %>

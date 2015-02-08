@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Serials</h1>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Genres</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @serials.each do |serial| %>
+       <tr>
+        <td><%= serial.name %></td>
+        <td>
+          <%serial.genre_movie_serial.all.each do |g| %>  
+            <%=g.genre.name %> <br/>
+          <% end %>
+        </td>
+        <td><%= link_to 'Show', serial, class: "btn btn-info" %></td>
+        <td><%= link_to 'Edit', edit_serial_path(serial), class: "btn btn-info"  %></td>
+        <td><%= link_to 'Destroy', serial, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"  %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Serial', new_serial_path %>  
