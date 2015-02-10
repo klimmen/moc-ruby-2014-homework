@@ -1,8 +1,12 @@
 <p id="notice"><%= notice %></p>
 
+<h3>Genres:</h3>
+<% @genres.each do |genre| %>
+  <%= link_to genre.name, genre_movies_path(genre.name), class: "btn btn-warning" %>
+<% end %>
 <h1>Listing Movies</h1>
 
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped ">
   <thead>
     <tr>
       <th>Name</th>
@@ -29,3 +33,4 @@
 
 <br>
 <%= link_to 'New Movie', new_movie_path %>
+

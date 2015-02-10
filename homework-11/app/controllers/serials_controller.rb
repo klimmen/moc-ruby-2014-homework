@@ -1,9 +1,10 @@
 class SerialsController < ApplicationController
   before_action :set_serial, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_genre, only: [:genre]
   # GET /serials
   def index
     @serials = Serial.all
+    @genres = Genre.all
   end
 
   # GET /serials/1
@@ -55,8 +56,17 @@ class SerialsController < ApplicationController
     end
   end
 
+    # GET /movies/:name
+  def genre
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
+    
+    def set_genre
+      @genre = Genre.find_by(:name => params[:name])
+    end
+
     def set_serial
       @serial = Serial.find(params[:id])
     end

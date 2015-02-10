@@ -2,9 +2,17 @@ Rails.application.routes.draw do
 
   #get 'home/index'
 root 'home#index'
-resources :movies
+
+resources :movies do
+  get '/:name', to: 'movies#genre', as:"genre", on: :collection
+end
+
+resources :serials do
+  get '/:name', to: 'serial#genre', as:"genre", on: :collection
+end
+
 resources :genres
-resources :serials
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

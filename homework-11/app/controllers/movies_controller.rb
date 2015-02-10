@@ -1,9 +1,10 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_genre, only: [:genre]
   # GET /movies
   def index
     @movies = Movie.all
+    @genres = Genre.all
   end
 
   # GET /movies/1
@@ -55,12 +56,20 @@ class MoviesController < ApplicationController
     end
   end
 
+  # GET /movies/:name
+  def genre
+  end
+
   private
 
     def set_movie
       @movie = Movie.find(params[:id])
     end
     
+   def set_genre
+      @genre = Genre.find_by(:name => params[:name])
+    end
+
     def genre_id
       genres_id = {}
       params[:movie_genre].each do |key, value|

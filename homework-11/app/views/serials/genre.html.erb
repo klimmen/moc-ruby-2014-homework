@@ -1,0 +1,6 @@
+<h1><%= @genre.name.capitalize %>:</h1>
+<ul >
+  <% @genre.genre_movie_serial.where(resource_type:"Serial").each do |movie| %>
+    <li><%=movie.resource.name%>  </li>
+  <%end%>
+</ul>
