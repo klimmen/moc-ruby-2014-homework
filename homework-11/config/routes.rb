@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
 
+
   #get 'home/index'
 root 'home#index'
 
 resources :movies do
-  get '/:name', to: 'movies#genre', as:"genre", on: :collection
+  get '/:name', to: 'movies#genre', as:"genre", constraints: { name: /\D\w+/ }, on: :collection
 end
 
 resources :serials do
-  get '/:name', to: 'serial#genre', as:"genre", on: :collection
+  get '/:name', to: 'serial#genre', as:"genre", constraints: { name: /\D\w+/ }, on: :collection
 end
 
 resources :genres

@@ -64,7 +64,7 @@ class SerialsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     
     def set_genre
-      @genre = Genre.find_by(:name => params[:name])
+      @genre_serials = Genre.find_by(:name => params[:name])
     end
 
     def set_serial
