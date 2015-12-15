@@ -30,9 +30,9 @@ end
 
 def parse_person(person, &create_methods)
   person.each do |key, value|
-    cleate_class = create_classes { key.split("_").map! {|a| a.capitalize}.join}
+    create_class = create_classes { key.split("_").map! {|a| a.capitalize}.join}
     lambda = ->(name_class){ Struct.new(name_class,*yield(key, value))}
-    cleate_class.call(lambda)
+    create_class.call(lambda)
   end  
 end
 
